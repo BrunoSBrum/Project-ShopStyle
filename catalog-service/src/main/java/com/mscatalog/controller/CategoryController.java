@@ -1,5 +1,6 @@
 package com.mscatalog.controller;
 
+import com.mscatalog.model.Category;
 import com.mscatalog.model.dto.CategoryRequest;
 import com.mscatalog.model.dto.CategoryResponse;
 import com.mscatalog.service.CategoryService;
@@ -35,22 +36,22 @@ public class CategoryController {
 
     @GetMapping("/{category_id}/products")
     @ResponseStatus(HttpStatus.OK)
-    public List<CategoryResponse> getCategoryForId(@PathVariable String category_id){
-        return this.categoryService.updateCategory(category_id);
+    public Category getCategoryForId(@PathVariable Long category_id){
+        return this.categoryService.findCategory(category_id);
     }
 
     @PutMapping("/{category_id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public List<CategoryResponse> updateCategory(@PathVariable String category_id
+    public Category updateCategory(@PathVariable Long category_id
             , @RequestBody @Validated CategoryRequest categoryRequest) throws Exception {
         return this.categoryService.updateCategory(category_id, categoryRequest);
     }
 
 
     @DeleteMapping("/{category_id}")
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<?> delete(@PathVariable String category_id){
-        return this.categoryService.deleteCategoryById(category_id);
+    public ResponseEntity<?> delete(@PathVariable Long category_id){
+       categoryService.deleteCategoryById(category_id);
+       return ResponseEntity.ok().build();
     }
 
 

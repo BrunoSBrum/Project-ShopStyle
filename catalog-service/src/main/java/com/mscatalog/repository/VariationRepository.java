@@ -6,11 +6,9 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 @Repository
-public interface VariationRepository extends MongoRepository<Variation, String> {
+public interface VariationRepository extends MongoRepository<Variation, Long> {
 
     @Query("{'variation_id' : ?0 }")
-    Optional<VariationResponse> findByVariationId(String variation_id);
+    VariationResponse findByVariationId(long variation_id);
 }

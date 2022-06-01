@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CategoryResponse {
 
-    private Object category_id;
+    private String category_id;
     private String name;
     private Boolean active;
     private Product product;

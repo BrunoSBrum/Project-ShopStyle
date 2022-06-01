@@ -29,7 +29,7 @@ public class VariationController {
     }
     @PutMapping("/{variation_id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public List<VariationResponse> updateVariation(@PathVariable String variation_id
+    public List<VariationResponse> updateVariation(@PathVariable Long variation_id
             , @RequestBody VariationRequest variationRequest ){
         return this.variationService.updateVariation(variation_id, variationRequest);
 
@@ -37,7 +37,7 @@ public class VariationController {
 
     @DeleteMapping("/{variation_id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<?> deleteVariation(@PathVariable String variation_id){
+    public ResponseEntity<?> deleteVariation(@PathVariable Long variation_id){
         return this.variationService.deleteVariationById(variation_id);
     }
 }

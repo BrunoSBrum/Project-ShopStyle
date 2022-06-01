@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
-@Entity
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -19,8 +19,11 @@ import java.math.BigDecimal;
 @Document(value = "variation")
 public class Variation {
 
+    @Transient
+    public static final String SEQUENCE_NAME = "variant_id";
+
     @Id
-    private String variation_id;
+    private Long variation_id;
 
     @NotNull(message = "the field cannot be null")
     @NotBlank(message = "the field cannot be empty")

@@ -12,16 +12,19 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(value = "Product")
+@Document(value = "product")
 public class Product {
 
+    @Transient
+    public static final String SEQUENCE_NAME = "products_sequence";
+
     @Id
-    private String product_id;
+    private Long product_id;
 
     @NotNull(message = "the field cannot be null")
     @NotBlank(message = "the field cannot be empty")
@@ -39,7 +42,6 @@ public class Product {
     @JoinColumn(name = "variation_id")
     private List<Variation> variation = new ArrayList<>();
 
-    @ManyToMany
-    private List<Category> category_ids;
+    private List<Long> category_ids;
 
 }

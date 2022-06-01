@@ -3,81 +3,93 @@ package com.mscatalog.service;
 import com.mscatalog.model.Category;
 import com.mscatalog.model.Product;
 import com.mscatalog.model.dto.ProductRequest;
-import com.mscatalog.model.dto.ProductResponse;
 import com.mscatalog.repository.CategoryRepository;
 import com.mscatalog.repository.ProductRepository;
-import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
+import static org.springframework.data.mongodb.core.query.Criteria.where;
 
 @Service
-@RequiredArgsConstructor
 public class ProductService {
+    @Autowired
+    private CategoryRepository categoryRepository;
+    @Autowired
+    private ProductRepository productRepository;
+    @Autowired
+    private ModelMapper modelMapper;
+    @Autowired
+    private MongoTemplate mongoTemplate;
+    @Autowired
+    private SequenceGeneratorServ sequenceGeneratorServ;
 
-    private final CategoryRepository categoryRepository;
-    private final ProductRepository productRepository;
+    public Product createProduct(ProductRequest productRequest) throws Exception {
 
-    public Product createProduct(ProductRequest productRequest) {
-        Boolean active = false;
+        Product product = modelMapper.map(productRequest, Product.class);
+        product.setProduct_id(sequenceGeneratorServ
+                .getSeqName(Product.SEQUENCE_NAME));
+        List<Long> category_ids = product.getCategory_ids();
 
-        Product product = Product.builder()
-                .name(productRequest.getName())
-                .description(productRequest.getDescription())
-                .active(productRequest.getActive())
-                .category_ids(productRequest.getCategory_ids())
-                .build();
+        for (Long category_id : category_ids) {
+            Category category = categoryRepository
+                    .findByCategory_id(category_id);
 
-
-        List<Category> category_id = product.getCategory_ids();
-        active =  (categoryRepository.findByCategory_id(String.valueOf(category_id))).get().getActive();
-        if(active){
-            return productRepository.save(product);
-        }else {
-            throw new RuntimeException("category is not enabled");
-
+            if (category.getActive()) {
+                mongoTemplate.save(product);
+                mongoTemplate.update(Category.class)
+                        .matching(where("category_ids")
+                                .is(category.getCategory_id()))
+                                .apply(new Update().push("productList", product))
+                                      .first();
+            }
+            if (category.getActive()) {
+                return productRepository.save(product);
+            } else {
+                throw new Exception("category is not active");
+            }
         }
-
+        return product;
     }
 
-    public List<ProductResponse> getAllProducts() {
-        List<Product> product = productRepository.findAll();
-
-        return product.stream().map(this::mapToProductResponse).toList();
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
     }
 
-    private ProductResponse mapToProductResponse(Product product) {
-        return ProductResponse.builder()
-                .category_ids(product.getCategory_ids().toString())
-                .name(product.getName())
-                .description(product.getDescription())
-                .active(product.getActive())
-                .build();
+    public Product updateProduct(long product_id, ProductRequest productRequest) {
+        Product productSpecific = productRepository
+                .findByProduct_id(product_id);
+
+        Product product = modelMapper.map(productRequest, Product.class);
+        product.setName(productSpecific.getName());
+        product.setActive(productSpecific.getActive());
+        product.setDescription(productSpecific.getDescription());
+        product.setCategory_ids(productSpecific.getCategory_ids());
+        product.setVariation(productSpecific.getVariation());
+
+       return productRepository.save(product);
     }
 
-    public ResponseEntity<?> deleteById(String product_id){
+    public ResponseEntity<?> deleteById(long product_id) {
         productRepository.deleteById(product_id);
         return null;
     }
 
-    public List<ProductResponse> updateProduct(String product_id, ProductRequest productRequest) {
+    public Product getProductForId(Long product_id) {
+        Product product;
 
-        Optional<ProductResponse> product = productRepository.findByProduct_id(product_id);
-        if(product.isPresent()){
-            ProductResponse productUpdate = (ProductResponse) product.get();
+        if (product_id != null) {
+            product = productRepository
+                    .findByProduct_id(product_id);
+        } else {
+            throw new RuntimeException("Incorrect id");
 
-            productUpdate.setName(productRequest.getName());
-            productUpdate.setDescription(productRequest.getDescription());
-            productUpdate.setActive(productRequest.getActive());
-            productUpdate.setCategory_ids(productRequest.getCategory_ids().toString());
-            //productRepository.save(productUpdate);
-
-
-        }else {
-            throw new IllegalArgumentException("id not found");
         }
-        return null;
+        return product;
     }
 }

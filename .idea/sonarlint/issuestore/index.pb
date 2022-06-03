@@ -1,13 +1,9 @@
 
-C
-docker-compose.yaml,e\f\ef8def03dc8f162799089e9b5f4321201c8810d5
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 x
 Hcustomer-service/src/main/java/com/ms/customer/security/AuthService.java,a\d\ad44a799789c07a8a08dee7dd8e95dc9a2def264
-w
-Gcustomer-service/src/main/java/com/ms/customer/CustomerApplication.java,0\3\03e1193cccb1fa584e6d22a23ce6a2b1294cf586
 |
 Lcustomer-service/src/test/java/com/ms/customer/CustomerApplicationTests.java,5\1\51e24d93e78ea5417dd5fa9da612b7c4bf6aca24
 ƒ
@@ -28,10 +24,6 @@ c
 3history/src/main/java/model/Dto/PaymentRequest.java,b\3\b3687f8fa1f60b2e776df7d85c42141ffdda4673
 d
 4history/src/main/java/model/Dto/PaymentResponse.java,f\d\fd4f66d4b05348edc76e229e24f361ac6c01fe43
-y
-Icheckout-service/src/main/java/com/compass/mscheckout/model/Payments.java,9\0\90ac0f1c8708d4787db4fb8e51faf2d31003f492
-ˆ
-Xcheckout-service/src/main/java/com/compass/mscheckout/controller/PaymentsController.java,e\8\e82377393a9577066e1393d1182791c84e3e32b1
 ˆ
 Xcheckout-service/src/main/java/com/compass/mscheckout/repository/PaymentsRepository.java,c\c\ccf184b8be3beac158f8247a62291dc4f52b8e4e
 „
@@ -42,16 +34,10 @@ Ucheckout-service/src/main/java/com/compass/mscheckout/model/dto/PaymentsRespons
 Rcheckout-service/src/main/java/com/compass/mscheckout/service/PaymentsService.java,7\e\7eeb12c7da511e033206b0a344085f0bbc6e3ed5
 p
 @customer-service/src/main/java/com/ms/customer/model/Perfil.java,2\3\23c6b032bfc92f9bbd58d70a2ddf9e6e317b3230
-G
-catalog-service/pom.xml,a\5\a53789dc44af37243dacf253849d0d8fefa6fa76
 H
 checkout-service/pom.xml,e\a\eaa585e8b2303b46ed9f398896fa77b8673c9bb8
-H
-customer-service/pom.xml,5\8\5828c3b58c65a5dabc2340b48a37b3e92462b9b0
 E
 eureka-server/pom.xml,b\3\b39ae52d769ea03b699b5602439afd875433c8a7
-?
-history/pom.xml,b\6\b6c12a430c81be31b3656a478d1e79ac7a2ff53c
 X
 (history/src/main/java/model/Product.java,1\6\1643be30a53678e766479042b1666bdb8f0a10c2
 g
@@ -76,20 +62,12 @@ Rcustomer-service/src/main/java/com/ms/customer/model/validation/SexValidation.j
 Qcustomer-service/src/main/java/com/ms/customer/model/validation/SexValidator.java,2\8\2850078210dc1d47e80b25fd99d96bc31ff8215c
 n
 >customer-service/src/main/java/com/ms/customer/model/User.java,8\9\8901704937d06c3158940ab3b9c8ba25f7334764
-U
-%history/src/main/java/model/User.java,3\f\3f75ae807759070b84d5a93758a391443cd13351
-}
-Mcustomer-service/src/main/java/com/ms/customer/controller/UserController.java,3\2\3234a213515ae12c0df215ef37d80b74c32836a2
 }
 Mcustomer-service/src/main/java/com/ms/customer/repository/UserRepository.java,1\5\15050280994cc85e9d775ad4228a1d96c3554b21
 d
 4history/src/main/java/repository/UserRepository.java,d\e\de36151d0c938eb64936e91a791979af2b5393b3
-y
-Icustomer-service/src/main/java/com/ms/customer/model/dto/UserRequest.java,c\6\c670c5a5a3816136485197f3a5b08c45b7f9096a
 `
 0history/src/main/java/model/Dto/UserRequest.java,a\3\a36222acaa4ff5bc4e38b0c6320f9fe4606da81b
-z
-Jcustomer-service/src/main/java/com/ms/customer/model/dto/UserResponse.java,5\4\54fe7ccea05b084ec543e43aa2f293068e7f3d8c
 a
 1history/src/main/java/model/Dto/UserResponse.java,d\8\d8fc7c4ee6639cb2487f56e015cce4fcf6dce694
 w

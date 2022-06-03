@@ -5,7 +5,7 @@ spring:
     name: checkout
   datasource:
     password: postgrespw
-    url: jdbc:postgresql://localhost:49154/customer?allowPublicKeyRetrieval=true&sslMode=DISABLED
+    url: jdbc:postgresql://localhost:49157/checkout?allowPublicKeyRetrieval=true&sslMode=DISABLED
     username: postgres
   jpa:
     show-sql: true

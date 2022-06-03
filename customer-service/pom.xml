@@ -30,11 +30,6 @@
         </dependency>
     </dependencies>
 
-    <properties>
-        <java.version>11</java.version>
-        <devdojo-core.version>1.0-SNAPSHOT</devdojo-core.version>
-        <devdojo-token.version>1.0-SNAPSHOT</devdojo-token.version>
-    </properties>
 
     <build>
         <finalName>customer</finalName>

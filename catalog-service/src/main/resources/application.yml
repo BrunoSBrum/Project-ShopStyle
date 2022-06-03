@@ -9,8 +9,8 @@ spring:
       host: localhost
       port: 49155
       database: shopstyle
-      password: mongopw
-      username: docker
+      password: root
+      username: admin
       authentication-database: admin
   main:
     allow-bean-definition-overriding: true
